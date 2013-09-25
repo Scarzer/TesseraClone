@@ -16,7 +16,7 @@ void MainWindow::closeEvent(QCloseEvent *event){
 
 void MainWindow::m_createActions(){
     // File Menu
-    a_newProject = new QAction(,tr("&New"),this);
+    a_newProject = new QAction(QIcon(),tr("&New"),this);
     a_openExample;
     a_loadProject;
 
