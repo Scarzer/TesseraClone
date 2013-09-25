@@ -19,7 +19,11 @@ void MainWindow::m_createActions(){
     a_newProject = new QAction(QIcon(":/icons/file-new.png"),tr("&New"),this);
     a_newProject->setShortcut((QKeySequence::New));
     a_newProject->setStatusTip(tr("Create a new file"));
-    a_openExample;
+
+    a_openExample = new QAction(QIcon(":/icons/file-open.png"), tr("&Open Examples"), this);
+    a_openExample->setShortcut(QKeySequence::Open);
+    a_openExample->setStatusTip(tr("Select from a choice of examples"));
+
     a_loadProject;
 
     a_saveProject;
@@ -36,9 +40,11 @@ void MainWindow::m_createMenus(){
     // File Menu
     fileMenu = menuBar()->addMenu(tr("&File"));
     fileMenu->addAction(a_newProject);
+    fileMenu->addAction(a_openExample);
 
     // Edit Menu
     editMenu = menuBar()->addMenu(tr("$Edit"));
+
 
     // View Menu
     viewMenu = menuBar()->addMenu(tr("$View"));
