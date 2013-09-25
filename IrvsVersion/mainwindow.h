@@ -78,6 +78,17 @@ private:
     QAction *a_output;
     QAction *a_palette;
     QAction *a_info;
+
+    // Edit Toolbar
+    QAction *a_pencil;
+    QAction *a_eraser;
+    QAction *a_fuzzySelect;
+    QAction *a_byColorSelect;
+    QAction *a_bucketFill;
+    QAction *a_colorPicker;
+    QAction *a_rectSelect;
+    // Seperate
+    QAction *a_noneIcon;
 };
 
 #endif // MAINWINDOW_H

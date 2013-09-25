@@ -73,7 +73,7 @@ void MainWindow::m_createActions(){
     a_paste = new QAction(QIcon(":/"), tr("&Paste"),this);
     a_paste->setShortcut(QKeySequence::Paste);
 
-    a_fillSelection = new QAction(QIcon(":/"), tr("F&ill Selection"),this);
+    a_fillSelection = new QAction(QIcon(":/icons/tool-bucket-fill-22.png"), tr("F&ill Selection"),this);
     a_fillSelection->setShortcut(QKeySequence("Ctrl+I"));
 
     a_blendTool = new QAction(QIcon(":/"), tr("Blen&d Tool"),this);
@@ -95,10 +95,10 @@ void MainWindow::m_createActions(){
 
 
     // View Menu
-    a_zoomIn = new QAction(QIcon(":/"), tr("&Zoom In"),this);
+    a_zoomIn = new QAction(QIcon(":/icons/view-zoomin.png"), tr("&Zoom In"),this);
     a_zoomIn->setShortcut(QKeySequence("Ctrl+="));
 
-    a_zoomOut = new QAction(QIcon(":/"), tr("Zoom &Out"),this);
+    a_zoomOut = new QAction(QIcon(":/icons/view-zoomout.png"), tr("Zoom &Out"),this);
     a_zoomOut->setShortcut(QKeySequence("Ctrl+-"));
 
     a_fitWindow = new QAction(QIcon(":/"), tr("Fit &Window"),this);
@@ -111,7 +111,7 @@ void MainWindow::m_createActions(){
     a_toggleSections = new QAction(QIcon(":/"), tr("Toggle &Sections"),this);
     a_toggleSections->setShortcut(QKeySequence("Ctrl+B"));
 
-    a_showLayerManager = new QAction(QIcon(":/"), tr("Show Layer &Manager"),this);
+    a_showLayerManager = new QAction(QIcon(":/icons/view-layer-manager.png"), tr("Show Layer &Manager"),this);
     a_showLayerManager->setShortcut(QKeySequence("Ctrl+M"));
     // Seperate
     a_input = new QAction(QIcon(":/"), tr("&Input"),this);
@@ -125,6 +125,18 @@ void MainWindow::m_createActions(){
 
     a_info = new QAction(QIcon(":/"), tr("I&nfo"),this);
     a_info->setShortcut(QKeySequence("4"));
+
+
+    // Edit Toolbar
+    a_pencil = new QAction(QIcon(":/icons/tool-pencil-22.png"), tr("Pencil"),this);
+    a_eraser = new QAction(QIcon(":/icons/tool-eraser-22.png"), tr("Eraser"),this);
+    a_fuzzySelect = new QAction(QIcon(":/icons/tool-fuzzy-select-22.png"), tr("Fuzze Selection Tool"),this);
+    a_byColorSelect = new QAction(QIcon(":/icons/tool-by-color-select-22.png"), tr("By Color Selection Tool"),this);
+    a_bucketFill = new QAction(QIcon(":/icons/tool-bucket-fill-22.png"), tr("Bucket Fill"),this);
+    a_colorPicker = new QAction(QIcon(":/icons/tool-color-picker-22.png"), tr("Color Picker"),this);
+    a_rectSelect = new QAction(QIcon(":/icons/tool-rect-select-22.png"), tr("Rectangle Selection"),this);
+    // Seperate
+    a_noneIcon = new QAction(QIcon(":/icons/tool-none-icon.png"), tr("None"),this);
 }
 
 void MainWindow::m_createMenus(){
@@ -183,7 +195,22 @@ void MainWindow::m_createStatusBar(){
 void MainWindow::m_createToolBars(){
     fileToolBar = addToolBar(tr("File"));
     fileToolBar->addAction(a_newProject);
-//    fileToolBar->addAction(a_openExample);
     fileToolBar->addAction(a_loadProject);
     fileToolBar->addAction(a_saveProject);
+
+    fileToolBar = addToolBar(tr("Zooming Tools"));
+    fileToolBar->addAction(a_zoomIn);
+    fileToolBar->addAction(a_zoomOut);
+    fileToolBar->addAction(a_showLayerManager);
+
+    editToolBar = addToolBar(tr("Edit"));
+    editToolBar->addAction(a_pencil);
+    editToolBar->addAction(a_eraser);
+    editToolBar->addAction(a_fuzzySelect);
+    editToolBar->addAction(a_byColorSelect);
+    editToolBar->addAction(a_bucketFill);
+    editToolBar->addAction(a_colorPicker);
+    editToolBar->addAction(a_rectSelect);
+    editToolBar->addSeparator();
+    editToolBar->addAction(a_noneIcon);
 }
