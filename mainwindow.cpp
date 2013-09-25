@@ -3,6 +3,7 @@
 
 MainWindow::MainWindow()
 {
-    createActions();
-    createMenus();
+        m_createActions();
+        m_createMenus();
+        m_createCentralWidget();
 }

@@ -23,6 +23,7 @@ class MainWindow : public QMainWindow
     private:
         void m_createActions();
         void m_createMenus();
+        void m_createCentralWidget();
         
         QMenu *fileMenu;
         QMenu *editMenu;
