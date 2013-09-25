@@ -54,6 +54,7 @@ private:
     QAction *a_redo;
     // Seperate
     QAction *a_cut;
+    QAction *a_copy;
     QAction *a_paste;
     QAction *a_fillSelection;
     QAction *a_blendTool;

@@ -32,14 +32,14 @@ void MainWindow::m_createActions(){
     a_saveProject->setShortcut(QKeySequence::Save);
     a_saveProject->setStatusTip(tr("Save current file"));
 
-    a_saveAsProject = new QAction(QIcon(":/"), tr("&Save As..."),this);
+    a_saveAsProject = new QAction(QIcon(":/"), tr("Save &As..."),this);
     a_saveAsProject->setShortcut(QKeySequence("Ctrl+Shift+S"));
     a_saveAsProject->setStatusTip(tr("Save current file as a different name"));
 
-    a_savePalette = new QAction(QIcon(":/"), tr("&Save Palette"),this);
+    a_savePalette = new QAction(QIcon(":/"), tr("Save &Palette"),this);
     a_savePalette->setShortcut(QKeySequence("Ctrl+Shift+P"));
 
-    a_loadPalette = new QAction(QIcon(":/"), tr("&Load Palette"),this);
+    a_loadPalette = new QAction(QIcon(":/"), tr("Loa&d Palette"),this);
     a_loadPalette->setShortcut(QKeySequence("Ctrl+Shift+L"));
 
     a_exportPallet = new QAction(QIcon(":/"), tr("&Export"),this);
@@ -49,8 +49,42 @@ void MainWindow::m_createActions(){
     a_quit->setShortcut(QKeySequence("Ctrl+Q"));
 
     // Edit Menu
-    a_undo = new QAction(QIcon(":/"), tr("&Quit"),this);
-    a_undo->setShortcut(QKeySequence("Ctrl+Q"));
+    a_undo = new QAction(QIcon(":/"), tr("&Undo"),this);
+    a_undo->setShortcut(QKeySequence::Undo);
+
+    a_redo = new QAction(QIcon(":/"), tr("&Redo"),this);
+    a_redo->setShortcut(QKeySequence::Redo);
+
+    // ========================================
+
+    a_cut = new QAction(QIcon(":/"), tr("C&ut"),this);
+    a_cut->setShortcut(QKeySequence::Cut);
+
+    a_copy = new QAction(QIcon(":/"), tr("&Copy"),this);
+    a_copy->setShortcut(QKeySequence::Copy);
+
+    a_paste = new QAction(QIcon(":/"), tr("&Paste"),this);
+    a_paste->setShortcut(QKeySequence::Paste);
+
+    a_fillSelection = new QAction(QIcon(":/"), tr("F&ill Selection"),this);
+    a_fillSelection->setShortcut(QKeySequence("Ctrl+I"));
+
+    a_blendTool = new QAction(QIcon(":/"), tr("Blen&d Tool"),this);
+    a_blendTool->setShortcut(QKeySequence("Ctrl+D"));
+
+    a_copyCurrentLayer = new QAction(QIcon(":/"), tr("Cop&y Current Layer"),this);
+    a_copyCurrentLayer->setShortcut(QKeySequence("Ctrl+Shift+C"));
+
+    // =========================================
+
+    a_resetAllParameters = new QAction(QIcon(":/"), tr("Reset &All Parameters"),this);
+    a_resetAllParameters->setShortcut(QKeySequence("Ctrl+Shift+A"));
+
+    a_cropInput = new QAction(QIcon(":/"), tr("Cr&op Input"),this);
+    a_cropInput->setShortcut(QKeySequence("Ctrl+Shift+R"));
+
+    a_cropOutput = new QAction(QIcon(":/"), tr("Crop Outpu&t"),this);
+    a_cropOutput->setShortcut(QKeySequence("Ctrl+Shift+T"));
 }
 
 void MainWindow::m_createMenus(){
@@ -72,8 +106,20 @@ void MainWindow::m_createMenus(){
 
     // Edit Menu
     editMenu = menuBar()->addMenu(tr("&Edit"));
-
-
+    editMenu->addAction(a_undo);
+    editMenu->addAction(a_redo);
+    editMenu->addSeparator();
+    editMenu->addAction(a_cut);
+    editMenu->addAction(a_copy);
+    editMenu->addAction(a_paste);
+    editMenu->addAction(a_fillSelection);
+    editMenu->addAction(a_blendTool);
+    editMenu->addAction(a_copyCurrentLayer);
+    editMenu->addSeparator();
+    editMenu->addAction(a_resetAllParameters);
+    editMenu->addSeparator();
+    editMenu->addAction(a_cropInput);
+    editMenu->addAction(a_cropOutput);
     // View Menu
     viewMenu = menuBar()->addMenu(tr("&View"));
 }
