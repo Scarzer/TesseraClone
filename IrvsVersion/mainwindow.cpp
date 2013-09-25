@@ -56,4 +56,8 @@ void MainWindow::m_createStatusBar(){
 }
 
 void MainWindow::m_createToolBars(){
+    fileToolBar = addToolBar(tr("File"));
+    fileToolBar->addAction(a_newProject);
+    fileToolBar->addAction(a_openExample);
+    fileToolBar->addAction(a_loadProject)
 }
