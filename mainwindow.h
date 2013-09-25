@@ -21,9 +21,16 @@ class MainWindow : public QMainWindow
         bool s_saveAs();
     
     private:
-    void m_createActions();
-    void m_createMenus();
-    
+        void m_createActions();
+        void m_createMenus();
+        
+        QMenu *fileMenu;
+        QMenu *editMenu;
+        QToolBar *fileToolBar;
+        QToolBar *editToolBar;
+        QAction *newAction;
+        QAction *openAction;
+        
 }
 
 
