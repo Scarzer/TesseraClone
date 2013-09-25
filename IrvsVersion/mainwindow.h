@@ -50,6 +50,20 @@ private:
     QAction *a_quit;
 
     // Edit Menu
+    QAction *a_undo;
+    QAction *a_redo;
+    // Seperate
+    QAction *a_cut;
+    QAction *a_paste;
+    QAction *a_fillSelection;
+    QAction *a_blendTool;
+    QAction *a_copyCurrentLayer;
+    // Seperate
+    QAction *a_resetAllParameters;
+    // Seperate
+    QAction *a_cropInput;
+    QAction *a_cropOutput;
 };
 
 #endif // MAINWINDOW_H
+
