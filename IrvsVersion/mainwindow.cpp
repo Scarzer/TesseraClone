@@ -6,8 +6,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     m_createActions();
     m_createMenus();
-    m_createStatusBar();
+    m_createCentralWidget();
     m_createToolBars();
+    m_createStatusBar();
 }
 
 void MainWindow::closeEvent(QCloseEvent *event){
@@ -53,7 +54,7 @@ void MainWindow::m_createActions(){
 
     a_quit = new QAction(QIcon(":/"), tr("&Quit"),this);
     a_quit->setShortcut(QKeySequence("Ctrl+Q"));
-
+    connect(a_quit, SIGNAL(triggered()), this, SLOT(close()));
 
     // Edit Menu
     a_undo = new QAction(QIcon(":/"), tr("&Undo"),this);
@@ -189,7 +190,16 @@ void MainWindow::m_createMenus(){
     viewMenu->addAction(a_info);
 }
 
-void MainWindow::m_createStatusBar(){
+void MainWindow::m_createCentralWidget(){
+    //QMainWindow *window = new QMainWindow();
+    //QWidget* centralWidget = new QWidget(window);
+    QTabWidget* tabs = new QTabWidget();
+
+    tabs->addTab(new QWidget(), "Input");
+    tabs->addTab(new QWidget(), "Output");
+
+    //window->setCentralWidget(centralWidget);
+    //window->show();
 }
 
 void MainWindow::m_createToolBars(){
@@ -213,4 +223,7 @@ void MainWindow::m_createToolBars(){
     editToolBar->addAction(a_rectSelect);
     editToolBar->addSeparator();
     editToolBar->addAction(a_noneIcon);
+}
+
+void MainWindow::m_createStatusBar(){
 }
