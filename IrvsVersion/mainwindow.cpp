@@ -28,6 +28,8 @@ void MainWindow::m_createActions(){
     a_loadProject->setShortcut(QKeySequence("Ctrl+L"));
     a_loadProject->setStatusTip(tr("Load a former file"));
 
+    // =========
+
     a_saveProject = new QAction(QIcon(":/icons/file-save.png"), tr("&Save"),this);
     a_saveProject->setShortcut(QKeySequence::Save);
     a_saveProject->setStatusTip(tr("Save current file"));
@@ -36,17 +38,22 @@ void MainWindow::m_createActions(){
     a_saveAsProject->setShortcut(QKeySequence("Ctrl+Shift+S"));
     a_saveAsProject->setStatusTip(tr("Save current file as a different name"));
 
+    // =========
+
     a_savePalette = new QAction(QIcon(":/"), tr("Save &Palette"),this);
     a_savePalette->setShortcut(QKeySequence("Ctrl+Shift+P"));
 
     a_loadPalette = new QAction(QIcon(":/"), tr("Loa&d Palette"),this);
     a_loadPalette->setShortcut(QKeySequence("Ctrl+Shift+L"));
 
+    // =========
+
     a_exportPallet = new QAction(QIcon(":/"), tr("&Export"),this);
     a_exportPallet->setShortcut(QKeySequence("Ctrl+E"));
 
     a_quit = new QAction(QIcon(":/"), tr("&Quit"),this);
     a_quit->setShortcut(QKeySequence("Ctrl+Q"));
+
 
     // Edit Menu
     a_undo = new QAction(QIcon(":/"), tr("&Undo"),this);
@@ -55,7 +62,7 @@ void MainWindow::m_createActions(){
     a_redo = new QAction(QIcon(":/"), tr("&Redo"),this);
     a_redo->setShortcut(QKeySequence::Redo);
 
-    // ========================================
+    // =========
 
     a_cut = new QAction(QIcon(":/"), tr("C&ut"),this);
     a_cut->setShortcut(QKeySequence::Cut);
@@ -75,7 +82,7 @@ void MainWindow::m_createActions(){
     a_copyCurrentLayer = new QAction(QIcon(":/"), tr("Cop&y Current Layer"),this);
     a_copyCurrentLayer->setShortcut(QKeySequence("Ctrl+Shift+C"));
 
-    // =========================================
+    // =========
 
     a_resetAllParameters = new QAction(QIcon(":/"), tr("Reset &All Parameters"),this);
     a_resetAllParameters->setShortcut(QKeySequence("Ctrl+Shift+A"));
@@ -85,6 +92,39 @@ void MainWindow::m_createActions(){
 
     a_cropOutput = new QAction(QIcon(":/"), tr("Crop Outpu&t"),this);
     a_cropOutput->setShortcut(QKeySequence("Ctrl+Shift+T"));
+
+
+    // View Menu
+    a_zoomIn = new QAction(QIcon(":/"), tr("&Zoom In"),this);
+    a_zoomIn->setShortcut(QKeySequence("Ctrl+="));
+
+    a_zoomOut = new QAction(QIcon(":/"), tr("Zoom &Out"),this);
+    a_zoomOut->setShortcut(QKeySequence("Ctrl+-"));
+
+    a_fitWindow = new QAction(QIcon(":/"), tr("Fit &Window"),this);
+    a_fitWindow->setShortcut(QKeySequence("Ctrl+W"));
+
+    a_fullscreen = new QAction(QIcon(":/"), tr("&Fullscreen"),this);
+    a_fullscreen->setShortcut(QKeySequence("Ctrl+F"));
+
+    // Seperate
+    a_toggleSections = new QAction(QIcon(":/"), tr("Toggle &Sections"),this);
+    a_toggleSections->setShortcut(QKeySequence("Ctrl+B"));
+
+    a_showLayerManager = new QAction(QIcon(":/"), tr("Show Layer &Manager"),this);
+    a_showLayerManager->setShortcut(QKeySequence("Ctrl+M"));
+    // Seperate
+    a_input = new QAction(QIcon(":/"), tr("&Input"),this);
+    a_input->setShortcut(QKeySequence("1"));
+
+    a_output = new QAction(QIcon(":/"), tr("O&utput"),this);
+    a_output->setShortcut(QKeySequence("2"));
+
+    a_palette = new QAction(QIcon(":/"), tr("&Palette"),this);
+    a_palette->setShortcut(QKeySequence("3"));
+
+    a_info = new QAction(QIcon(":/"), tr("I&nfo"),this);
+    a_info->setShortcut(QKeySequence("4"));
 }
 
 void MainWindow::m_createMenus(){
@@ -120,8 +160,21 @@ void MainWindow::m_createMenus(){
     editMenu->addSeparator();
     editMenu->addAction(a_cropInput);
     editMenu->addAction(a_cropOutput);
+
     // View Menu
     viewMenu = menuBar()->addMenu(tr("&View"));
+    viewMenu->addAction(a_zoomIn);
+    viewMenu->addAction(a_zoomOut);
+    viewMenu->addAction(a_fitWindow);
+    viewMenu->addAction(a_fullscreen);
+    viewMenu->addSeparator();
+    viewMenu->addAction(a_toggleSections);
+    viewMenu->addAction(a_showLayerManager);
+    viewMenu->addSeparator();
+    viewMenu->addAction(a_input);
+    viewMenu->addAction(a_output);
+    viewMenu->addAction(a_palette);
+    viewMenu->addAction(a_info);
 }
 
 void MainWindow::m_createStatusBar(){

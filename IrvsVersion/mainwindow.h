@@ -64,6 +64,20 @@ private:
     // Seperate
     QAction *a_cropInput;
     QAction *a_cropOutput;
+
+    // View Menu
+    QAction *a_zoomIn;
+    QAction *a_zoomOut;
+    QAction *a_fitWindow;
+    QAction *a_fullscreen;
+    // Seperate
+    QAction *a_toggleSections;
+    QAction *a_showLayerManager;
+    // Seperate
+    QAction *a_input;
+    QAction *a_output;
+    QAction *a_palette;
+    QAction *a_info;
 };
 
 #endif // MAINWINDOW_H
