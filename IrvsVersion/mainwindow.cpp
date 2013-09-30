@@ -9,6 +9,10 @@ MainWindow::MainWindow(QWidget *parent)
     m_createCentralWidget();
     m_createToolBars();
     m_createStatusBar();
+
+    //Setting window size.
+    setMinimumSize  (400,300);
+    resize          (600,400);
 }
 
 void MainWindow::closeEvent(QCloseEvent *event){
@@ -191,15 +195,17 @@ void MainWindow::m_createMenus(){
 }
 
 void MainWindow::m_createCentralWidget(){
-    //QMainWindow *window = new QMainWindow();
-    //QWidget* centralWidget = new QWidget(window);
+
     QTabWidget* tabs = new QTabWidget();
 
     tabs->addTab(new QWidget(), "Input");
     tabs->addTab(new QWidget(), "Output");
 
-    //window->setCentralWidget(centralWidget);
-    //window->show();
+//   QHBoxLayout *mainLayout = new QHBoxLayout;
+//   mainLayout->addLayout(tabs);
+//   setLayout(mainLayout);
+//  tabs->show();
+
 }
 
 void MainWindow::m_createToolBars(){
