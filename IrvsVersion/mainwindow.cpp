@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     m_createActions();
     m_createMenus();
-    m_createCentralWidget();
+    createCentralWidget();
     m_createToolBars();
     m_createStatusBar();
 
@@ -131,6 +131,12 @@ void MainWindow::m_createActions(){
     a_info = new QAction(QIcon(":/"), tr("I&nfo"),this);
     a_info->setShortcut(QKeySequence("4"));
 
+    //Tools Menu
+
+    a_pencilm = new QAction(QIcon(":/icons/tool-pencil-22.png"), tr("Pencil"),this);
+    a_eraserm = new QAction(QIcon("://icons/tool-eraser-22.png"), tr("Eraser"), this);
+
+
 
     // Edit Toolbar
     a_pencil = new QAction(QIcon(":/icons/tool-pencil-22.png"), tr("Pencil"),this);
@@ -192,19 +198,31 @@ void MainWindow::m_createMenus(){
     viewMenu->addAction(a_output);
     viewMenu->addAction(a_palette);
     viewMenu->addAction(a_info);
+
+    //Tools Menu
+    toolsMenu = menuBar()->addMenu(tr("&Tools"));
+    toolsMenu->addAction(a_pencilm);
+    toolsMenu->addAction(a_eraserm);
 }
 
-void MainWindow::m_createCentralWidget(){
+void MainWindow::createCentralWidget(){
 
-    QTabWidget* tabs = new QTabWidget();
+//    QHBoxLayout *centralLayout = new QHBoxLayout(this);
+    QTabWidget *tabs = new QTabWidget(this);
 
-    tabs->addTab(new QWidget(), "Input");
-    tabs->addTab(new QWidget(), "Output");
+    QWidget *tabInput = new QWidget();
+    QWidget *tabOutput = new QWidget();
 
-//   QHBoxLayout *mainLayout = new QHBoxLayout;
-//   mainLayout->addLayout(tabs);
-//   setLayout(mainLayout);
-//  tabs->show();
+
+    tabs->addTab(tabInput, "Input");
+    tabs->addTab(tabOutput, "Output");
+
+    setCentralWidget(tabs);
+//    centralLayout->addWidget(tabs);
+    //QHBoxLayout *mainLayout = new QHBoxLayout;
+    //mainLayout->addLayout(tabs);
+    //setLayout(mainLayout);
+    //tabs->show();
 
 }
 

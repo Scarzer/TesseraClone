@@ -25,13 +25,14 @@ private slots:
 private:
     void m_createActions();
     void m_createMenus();
-    void m_createCentralWidget();
+    void createCentralWidget();
     void m_createToolBars();
     void m_createStatusBar();
 
     QMenu *fileMenu;
     QMenu *editMenu;
     QMenu *viewMenu;
+    QMenu *toolsMenu;
 
     QToolBar *fileToolBar;
     QToolBar *editToolBar;
@@ -71,14 +72,27 @@ private:
     QAction *a_zoomOut;
     QAction *a_fitWindow;
     QAction *a_fullscreen;
-    // Seperate
+
+    // Separate
     QAction *a_toggleSections;
     QAction *a_showLayerManager;
-    // Seperate
+
+    // Separate
     QAction *a_input;
     QAction *a_output;
     QAction *a_palette;
     QAction *a_info;
+
+    //Tools Menu
+    QAction *a_pencilm;
+    QAction *a_eraserm;
+    QAction *a_fuzzeSelection;
+    QAction *a_colorSelection;
+    QAction *a_bucketFillm;
+    QAction *a_colorPickerm;
+    QAction *a_rectSelectm;
+
+    //QAction *
 
     // Edit Toolbar
     QAction *a_pencil;
@@ -88,6 +102,7 @@ private:
     QAction *a_bucketFill;
     QAction *a_colorPicker;
     QAction *a_rectSelect;
+
     // Seperate
     QAction *a_noneIcon;
 };
