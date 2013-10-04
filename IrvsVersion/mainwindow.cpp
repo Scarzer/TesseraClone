@@ -135,7 +135,13 @@ void MainWindow::m_createActions(){
 
     a_pencilm = new QAction(QIcon(":/icons/tool-pencil-22.png"), tr("Pencil"),this);
     a_eraserm = new QAction(QIcon("://icons/tool-eraser-22.png"), tr("Eraser"), this);
+    a_fuzzeSelection = new QAction(QIcon("://icons/tool-fuzzy-select-22.png"), tr("Fuzze Selection Tool"),this);
+    a_colorSelection = new QAction(QIcon("://icons/tool-by-color-select-22.png"), tr("By Color Selection Tool"), this);
+    a_bucketFillm = new QAction(QIcon("://icons/tool-bucket-fill-22.png"), tr("Bucket Fill"), this);
+    a_colorPickerm = new QAction(QIcon("://icons/tool-color-picker-22.png"), tr("Color Picker"), this);
+    a_rectSelectm = new QAction(QIcon("://icons/tool-rect-select-22.png"), tr("Rectangle Selection"), this);
 
+    a_noneIconm = new QAction(QIcon("://icons/tool-none-icon.png"), tr("None"), this);
 
 
     // Edit Toolbar
@@ -203,27 +209,51 @@ void MainWindow::m_createMenus(){
     toolsMenu = menuBar()->addMenu(tr("&Tools"));
     toolsMenu->addAction(a_pencilm);
     toolsMenu->addAction(a_eraserm);
+    toolsMenu->addAction(a_fuzzeSelection);
+    toolsMenu->addAction(a_colorSelection);
+    toolsMenu->addAction(a_bucketFillm);
+    toolsMenu->addAction(a_colorPickerm);
+    toolsMenu->addAction(a_rectSelectm);
+    toolsMenu->addAction(a_noneIconm);
 }
 
 void MainWindow::createCentralWidget(){
 
-//    QHBoxLayout *centralLayout = new QHBoxLayout(this);
     QTabWidget *tabs = new QTabWidget(this);
 
     QWidget *tabInput = new QWidget();
     QWidget *tabOutput = new QWidget();
+    QWidget *tabPalette = new QWidget();
+    QWidget *tabInfo = new QWidget();
 
 
     tabs->addTab(tabInput, "Input");
     tabs->addTab(tabOutput, "Output");
+    tabs->addTab(tabPalette, "Palette");
+    tabs->addTab(tabInfo, "Info");
 
     setCentralWidget(tabs);
-//    centralLayout->addWidget(tabs);
-    //QHBoxLayout *mainLayout = new QHBoxLayout;
-    //mainLayout->addLayout(tabs);
-    //setLayout(mainLayout);
-    //tabs->show();
 
+    /*QTabWidget *m_tabPreview = new QTabWidget;
+    m_tabPreview->setMinimumSize(512, 512);
+    m_tabPreview->setContentsMargins(0, 0, 0, 0);
+    m_tabPreview->setSizePolicy(QSizePolicy::Expanding,
+                                QSizePolicy::Expanding);
+    QWidget *m_frameInput = new QWidget;
+    QWidget *m_frameOutput = new QWidget;
+    QWidget *m_framePalette = new QWidget;
+    QWidget *m_frameInfo = new QWidget;
+    m_tabPreview->addTab(m_frameInput, "Input");
+    m_tabPreview->addTab(m_frameOutput, "Ouput");
+    m_tabPreview->addTab(m_framePalette, "Palette");
+    m_tabPreview->addTab(m_frameInfo, "Info");
+
+    QWidget *m_controlPanel = new QWidget;
+    m_controlPanel->setMinimumSize(300, QSizePolicy::Expanding);
+
+    QHBoxLayout *hbox = new QHBoxLayout();
+    hbox->addWidget(m_tabPreview);
+    hbox->addWidget(m_controlPanel);*/
 }
 
 void MainWindow::m_createToolBars(){
@@ -246,6 +276,7 @@ void MainWindow::m_createToolBars(){
     editToolBar->addAction(a_colorPicker);
     editToolBar->addAction(a_rectSelect);
     editToolBar->addSeparator();
+
     editToolBar->addAction(a_noneIcon);
 }
 

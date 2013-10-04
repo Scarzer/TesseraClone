@@ -41,12 +41,15 @@ private:
     QAction *a_newProject;
     QAction *a_openExample;
     QAction *a_loadProject;
+
     // Seperate
     QAction *a_saveProject;
     QAction *a_saveAsProject;
+
     // Seperate
     QAction *a_savePalette;
     QAction *a_loadPalette;
+
     // Seperate
     QAction *a_exportPallet;
     QAction *a_quit;
@@ -54,6 +57,7 @@ private:
     // Edit Menu
     QAction *a_undo;
     QAction *a_redo;
+
     // Seperate
     QAction *a_cut;
     QAction *a_copy;
@@ -61,6 +65,7 @@ private:
     QAction *a_fillSelection;
     QAction *a_blendTool;
     QAction *a_copyCurrentLayer;
+
     // Seperate
     QAction *a_resetAllParameters;
     // Seperate
@@ -91,6 +96,7 @@ private:
     QAction *a_bucketFillm;
     QAction *a_colorPickerm;
     QAction *a_rectSelectm;
+    QAction *a_noneIconm;
 
     //QAction *
 
