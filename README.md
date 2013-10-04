@@ -1,3 +1,3 @@
 # Tessera Clone
-## Group: Sally Ventura, Carlos Whateves, Irving Derin
+## Group: Sally Ventura, Carlos Peralta, Irving Derin
 
