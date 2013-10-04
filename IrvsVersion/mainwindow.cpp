@@ -220,6 +220,8 @@ void MainWindow::m_createMenus(){
 void MainWindow::createCentralWidget(){
 
     QTabWidget *tabs = new QTabWidget(this);
+    tabs->setMinimumSize(QSize(300,200));
+    QWidget *window = new QWidget;
 
     QWidget *tabInput = new QWidget();
     QWidget *tabOutput = new QWidget();
@@ -232,7 +234,18 @@ void MainWindow::createCentralWidget(){
     tabs->addTab(tabPalette, "Palette");
     tabs->addTab(tabInfo, "Info");
 
-    setCentralWidget(tabs);
+    QWidget *controlPanel = new QWidget;
+    controlPanel->setMinimumSize(QSize(200,200));
+
+    QHBoxLayout *hlayout = new QHBoxLayout;
+
+    hlayout->addWidget(tabs);\
+    hlayout->addWidget(controlPanel);
+
+
+    window->setLayout(hlayout);
+    window->show();
+
 
     /*QTabWidget *m_tabPreview = new QTabWidget;
     m_tabPreview->setMinimumSize(512, 512);
