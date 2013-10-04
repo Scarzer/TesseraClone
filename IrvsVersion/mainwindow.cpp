@@ -1,18 +1,27 @@
-#include <QtWidgets>
 #include "mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent){
 
+    //setCentralWidget(w_tabs);
     m_createActions();
     m_createMenus();
-    createCentralWidget();
+    m_createCentralWidget();
     m_createToolBars();
     m_createStatusBar();
 
     //Setting window size.
-    setMinimumSize  (400,300);
-    resize          (600,400);
+    //setMinimumSize  (400,300);
+    //resize          (600,400);
+
+    // Setting out the layout of everything
+    /*
+    mainLayout      = new QHBoxLayout;
+    mainLayout->addWidget(w_tabs);
+    mainLayout->addWidget(p_control);
+    setLayout(mainLayout);
+    setWindowTitle("Tessera Clone");
+    */
 }
 
 void MainWindow::closeEvent(QCloseEvent *event){
@@ -217,7 +226,29 @@ void MainWindow::m_createMenus(){
     toolsMenu->addAction(a_noneIconm);
 }
 
-void MainWindow::createCentralWidget(){
+void MainWindow::m_createCentralWidget(){
+    p_control   = new QWidget;
+
+    w_cWindow   = new QWidget;
+    w_tabs      = new QTabWidget(this);
+
+    t_Input     = new QWidget();
+    t_Output    = new QWidget();
+    t_Palette   = new QWidget();
+    t_Info      = new QWidget();
+    p_control   = new QWidget();
+
+    w_tabs->setMinimumSize(QSize(300,200));
+    w_tabs->addTab(t_Input, tr("Input"));
+    w_tabs->addTab(t_Output,tr("Output"));
+    w_tabs->addTab(t_Palette,tr("Palette"));
+    w_tabs->addTab(t_Info,tr("Info"));
+
+    p_control->setMinimumSize(QSize(200,200));
+
+}
+
+/*void MainWindow::createCentralWidget(){
 
     QTabWidget *tabs = new QTabWidget(this);
     tabs->setMinimumSize(QSize(300,200));
@@ -241,8 +272,6 @@ void MainWindow::createCentralWidget(){
 
     hlayout->addWidget(tabs);\
     hlayout->addWidget(controlPanel);
-
-
     window->setLayout(hlayout);
     window->show();
 
@@ -266,8 +295,9 @@ void MainWindow::createCentralWidget(){
 
     QHBoxLayout *hbox = new QHBoxLayout();
     hbox->addWidget(m_tabPreview);
-    hbox->addWidget(m_controlPanel);*/
+    hbox->addWidget(m_controlPanel);
 }
+*/
 
 void MainWindow::m_createToolBars(){
     fileToolBar = addToolBar(tr("File"));
