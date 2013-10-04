@@ -3,7 +3,6 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent){
 
-    setCentralWidget(w_cWindow);
     m_createActions();
     m_createMenus();
     m_createCentralWidget();
@@ -13,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
     //Setting window size.
     setMinimumSize  (400,300);
     resize          (600,400);
+    setCentralWidget(w_cWindow);
 
 }
 
@@ -242,7 +242,7 @@ void MainWindow::m_createCentralWidget(){
     mainLayout->addWidget(w_tabs);
     mainLayout->addWidget(p_control);
     w_cWindow->setLayout(mainLayout);
-
+    w_cWindow->show();
 }
 
 /*void MainWindow::createCentralWidget(){
