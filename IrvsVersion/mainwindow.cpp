@@ -5,6 +5,10 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent){
 
+<<<<<<< HEAD
+=======
+    //setCentralWidget(w_tabs);
+>>>>>>> parent of 352f660... Found a better way. Reworking
     m_createActions();
     m_createMenus();
     m_createCentralWidget();
@@ -12,10 +16,23 @@ MainWindow::MainWindow(QWidget *parent)
     m_createStatusBar();
 
     //Setting window size.
+<<<<<<< HEAD
     setMinimumSize  (400,300);
     resize          (600,400);
     setCentralWidget(w_cWindow);
+=======
+    //setMinimumSize  (400,300);
+    //resize          (600,400);
+>>>>>>> parent of 352f660... Found a better way. Reworking
 
+    // Setting out the layout of everything
+    /*
+    mainLayout      = new QHBoxLayout;
+    mainLayout->addWidget(w_tabs);
+    mainLayout->addWidget(p_control);
+    setLayout(mainLayout);
+    setWindowTitle("Tessera Clone");
+    */
 }
 
 void MainWindow::closeEvent(QCloseEvent *event){
@@ -244,11 +261,6 @@ void MainWindow::m_createCentralWidget(){
     w_tabs->addTab(t_Info,tr("Info"));
 
     p_control->setMinimumSize(QSize(200,200));
-
-    mainLayout = new QHBoxLayout;
-    mainLayout->addWidget(w_tabs);
-    mainLayout->addWidget(p_control);
-    w_cWindow->setLayout(mainLayout);
 
 }
 
