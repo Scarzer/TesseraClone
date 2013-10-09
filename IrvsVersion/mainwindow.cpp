@@ -1,14 +1,10 @@
-<<<<<<< HEAD
 #include <QtWidgets>
 #include <QHBoxLayout>
-=======
->>>>>>> 352f660daeff9c0eb5016e7e36fa4d6b0d21ffe0
 #include "mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent){
 
-    setCentralWidget(w_cWindow);
     m_createActions();
     m_createMenus();
     m_createCentralWidget();
@@ -18,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     //Setting window size.
     setMinimumSize  (400,300);
     resize          (600,400);
+    setCentralWidget(w_cWindow);
 
 }
 
