@@ -1,4 +1,5 @@
 #include <QtWidgets>
+#include <QHBoxLayout>
 #include "mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -6,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     m_createActions();
     m_createMenus();
-    createCentralWidget();
+    m_createCentralWidget();
     m_createToolBars();
     m_createStatusBar();
 
@@ -118,6 +119,7 @@ void MainWindow::m_createActions(){
 
     a_showLayerManager = new QAction(QIcon(":/icons/view-layer-manager.png"), tr("Show Layer &Manager"),this);
     a_showLayerManager->setShortcut(QKeySequence("Ctrl+M"));
+
     // Seperate
     a_input = new QAction(QIcon(":/"), tr("&Input"),this);
     a_input->setShortcut(QKeySequence("1"));
@@ -217,9 +219,9 @@ void MainWindow::m_createMenus(){
     toolsMenu->addAction(a_noneIconm);
 }
 
-void MainWindow::createCentralWidget(){
+void MainWindow::m_createCentralWidget(){
 
-    QTabWidget *tabs = new QTabWidget(this);
+    QTabWidget *tabs = new QTabWidget();
 
     QWidget *tabInput = new QWidget();
     QWidget *tabOutput = new QWidget();
@@ -234,26 +236,28 @@ void MainWindow::createCentralWidget(){
 
     setCentralWidget(tabs);
 
-    /*QTabWidget *m_tabPreview = new QTabWidget;
+
+/*    QTabWidget *m_tabPreview = new QTabWidget();
     m_tabPreview->setMinimumSize(512, 512);
     m_tabPreview->setContentsMargins(0, 0, 0, 0);
     m_tabPreview->setSizePolicy(QSizePolicy::Expanding,
                                 QSizePolicy::Expanding);
-    QWidget *m_frameInput = new QWidget;
-    QWidget *m_frameOutput = new QWidget;
-    QWidget *m_framePalette = new QWidget;
-    QWidget *m_frameInfo = new QWidget;
+    QWidget *m_frameInput = new QWidget();
+    QWidget *m_frameOutput = new QWidget();
+    QWidget *m_framePalette = new QWidget();
+    QWidget *m_frameInfo = new QWidget();
     m_tabPreview->addTab(m_frameInput, "Input");
     m_tabPreview->addTab(m_frameOutput, "Ouput");
     m_tabPreview->addTab(m_framePalette, "Palette");
     m_tabPreview->addTab(m_frameInfo, "Info");
 
-    QWidget *m_controlPanel = new QWidget;
+    QWidget *m_controlPanel = new QWidget();
     m_controlPanel->setMinimumSize(300, QSizePolicy::Expanding);
 
     QHBoxLayout *hbox = new QHBoxLayout();
     hbox->addWidget(m_tabPreview);
-    hbox->addWidget(m_controlPanel);*/
+    hbox->addWidget(m_controlPanel); */
+
 }
 
 void MainWindow::m_createToolBars(){

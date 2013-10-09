@@ -25,7 +25,8 @@ private slots:
 private:
     void m_createActions();
     void m_createMenus();
-    void createCentralWidget();
+    void m_createCentralWidget();
+    void m_createControlPanel ();
     void m_createToolBars();
     void m_createStatusBar();
 
