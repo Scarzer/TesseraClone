@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QTWidgets>
 
 QT_BEGIN_NAMESPACE
 class QAction;
@@ -25,10 +26,17 @@ private slots:
 private:
     void m_createActions();
     void m_createMenus();
+<<<<<<< HEAD
     void m_createCentralWidget();
     void m_createControlPanel ();
+=======
+    void createCentralWidget();
+    void m_createCentralWidget();
+>>>>>>> 352f660daeff9c0eb5016e7e36fa4d6b0d21ffe0
     void m_createToolBars();
     void m_createStatusBar();
+
+    QMenuBar *mainMenu;
 
     QMenu *fileMenu;
     QMenu *editMenu;
@@ -37,6 +45,18 @@ private:
 
     QToolBar *fileToolBar;
     QToolBar *editToolBar;
+
+    //Central Window
+    QHBoxLayout *mainLayout;
+    QTabWidget  *w_tabs;
+    QWidget     *w_cWindow;
+    QWidget     *t_Input;
+    QWidget     *t_Output;
+    QWidget     *t_Palette;
+    QWidget     *t_Info;
+    QWidget     *p_control;
+
+
 
     // File Menu
     QAction *a_newProject;

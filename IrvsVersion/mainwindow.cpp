@@ -1,10 +1,14 @@
+<<<<<<< HEAD
 #include <QtWidgets>
 #include <QHBoxLayout>
+=======
+>>>>>>> 352f660daeff9c0eb5016e7e36fa4d6b0d21ffe0
 #include "mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent){
 
+    setCentralWidget(w_cWindow);
     m_createActions();
     m_createMenus();
     m_createCentralWidget();
@@ -14,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent)
     //Setting window size.
     setMinimumSize  (400,300);
     resize          (600,400);
+
 }
 
 void MainWindow::closeEvent(QCloseEvent *event){
@@ -220,8 +225,42 @@ void MainWindow::m_createMenus(){
 }
 
 void MainWindow::m_createCentralWidget(){
+<<<<<<< HEAD
 
     QTabWidget *tabs = new QTabWidget();
+=======
+    p_control   = new QWidget;
+
+    w_cWindow   = new QWidget;
+    w_tabs      = new QTabWidget(this);
+
+    t_Input     = new QWidget();
+    t_Output    = new QWidget();
+    t_Palette   = new QWidget();
+    t_Info      = new QWidget();
+    p_control   = new QWidget();
+
+    w_tabs->setMinimumSize(QSize(300,200));
+    w_tabs->addTab(t_Input, tr("Input"));
+    w_tabs->addTab(t_Output,tr("Output"));
+    w_tabs->addTab(t_Palette,tr("Palette"));
+    w_tabs->addTab(t_Info,tr("Info"));
+
+    p_control->setMinimumSize(QSize(200,200));
+
+    mainLayout = new QHBoxLayout;
+    mainLayout->addWidget(w_tabs);
+    mainLayout->addWidget(p_control);
+    w_cWindow->setLayout(mainLayout);
+
+}
+
+/*void MainWindow::createCentralWidget(){
+
+    QTabWidget *tabs = new QTabWidget(this);
+    tabs->setMinimumSize(QSize(300,200));
+    QWidget *window = new QWidget;
+>>>>>>> 352f660daeff9c0eb5016e7e36fa4d6b0d21ffe0
 
     QWidget *tabInput = new QWidget();
     QWidget *tabOutput = new QWidget();
@@ -234,7 +273,16 @@ void MainWindow::m_createCentralWidget(){
     tabs->addTab(tabPalette, "Palette");
     tabs->addTab(tabInfo, "Info");
 
-    setCentralWidget(tabs);
+    QWidget *controlPanel = new QWidget;
+    controlPanel->setMinimumSize(QSize(200,200));
+
+    QHBoxLayout *hlayout = new QHBoxLayout;
+
+    hlayout->addWidget(tabs);\
+    hlayout->addWidget(controlPanel);
+    window->setLayout(hlayout);
+    window->show();
+
 
 
 /*    QTabWidget *m_tabPreview = new QTabWidget();
@@ -256,9 +304,14 @@ void MainWindow::m_createCentralWidget(){
 
     QHBoxLayout *hbox = new QHBoxLayout();
     hbox->addWidget(m_tabPreview);
+<<<<<<< HEAD
     hbox->addWidget(m_controlPanel); */
 
+=======
+    hbox->addWidget(m_controlPanel);
+>>>>>>> 352f660daeff9c0eb5016e7e36fa4d6b0d21ffe0
 }
+*/
 
 void MainWindow::m_createToolBars(){
     fileToolBar = addToolBar(tr("File"));
