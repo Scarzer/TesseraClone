@@ -1,8 +1,12 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
+//#include <QMainWindow>
+#include <QtGui>
 #include <QtWidgets>
+#include "ControlPanel.h"
+#include "ImageWindow.h"
+#include "TesseraParameters.h"
 
 QT_BEGIN_NAMESPACE
 class QAction;
@@ -10,18 +14,33 @@ class QMenu;
 class QPlainTextEdit;
 QT_END_NAMESPACE
 
-class MainWindow : public QMainWindow
-{
+class MainWindow : public QMainWindow {
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = 0);
+    //! Constructor.
+    MainWindow();
 
-protected:
-    void closeEvent(QCloseEvent *event);
+    TesseraParameters&	parameters		();
+    void			updateInputFrame	();
+
+    //! Destructor.
+    ~MainWindow();
 
 private slots:
-    // Bunch of functions are going to go here!
+
+    // slots
+    void s_newProject	();
+    void s_loadProject	();
+    void s_saveProject	();
+    void s_undo		();
+    void s_redo		();
+    void s_zoomIn		();
+    void s_zoomOut		();
+    void s_showInputTab	();
+    void s_showOutputTab	();
+    void s_showPaletteTab	();
+    void s_showInfoTab	();
 
 private:
     void m_createActions();
@@ -43,16 +62,15 @@ private:
     QToolBar *editToolBar;
 
     //Central Window
-    QHBoxLayout *mainLayout;
-    QTabWidget  *w_tabs;
-    QWidget     *w_cWindow;
-    QWidget     *t_Input;
-    QWidget     *t_Output;
-    QWidget     *t_Palette;
-    QWidget     *t_Info;
-    QWidget     *p_control;
-
-
+    QHBoxLayout     *mainLayout;
+    QTabWidget      *w_tabs;
+    QWidget         *w_cWindow;
+    QWidget         *t_Input;
+    QWidget         *t_Output;
+    QWidget         *t_Palette;
+    QWidget         *t_Info;
+    ControlPanel    *p_control;
+    //QWidget     *p_control;
 
     // File Menu
     QAction *a_newProject;
@@ -118,16 +136,28 @@ private:
     //QAction *
 
     // Edit Toolbar
-    QAction *a_pencil;
-    QAction *a_eraser;
-    QAction *a_fuzzySelect;
-    QAction *a_byColorSelect;
-    QAction *a_bucketFill;
-    QAction *a_colorPicker;
-    QAction *a_rectSelect;
+    QAction         *a_pencil;
+    QAction         *a_eraser;
+    QAction         *a_fuzzySelect;
+    QAction         *a_byColorSelect;
+    QAction         *a_bucketFill;
+    QAction         *a_colorPicker;
+    QAction         *a_rectSelect;
 
     // Seperate
-    QAction *a_noneIcon;
+    QAction         *a_noneIcon;
+
+    // widgets
+    ImageWindow		*m_frameInput;
+    QWidget     	*m_frameOutput;
+    QWidget     	*m_framePalette;
+    QWidget         *m_frameInfo;
+    ControlPanel	*m_controlPanel;
+    QTabWidget		*m_tabPreview;
+
+    // other stuff
+    QString         m_currentInDir;
+    TesseraParameters m_params;
 };
 
 #endif // MAINWINDOW_H

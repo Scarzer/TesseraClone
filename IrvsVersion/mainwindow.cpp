@@ -1,7 +1,22 @@
 #include "mainwindow.h"
+#include "Globals.h"
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent){
+using namespace std;
+
+MainWindow	*g_mainWindow = NULL;
+
+MainWindow::MainWindow()
+    : QMainWindow(),
+           m_frameInput	 (NULL),
+           m_frameOutput (NULL),
+           m_framePalette(NULL),
+           m_frameInfo	 (NULL),
+           m_controlPanel(NULL),
+           m_tabPreview	 (NULL)
+{
+
+    // set g_mainWindow
+    g_mainWindow = this;
 
     m_createActions();
     m_createMenus();
@@ -10,21 +25,28 @@ MainWindow::MainWindow(QWidget *parent)
     m_createStatusBar();
 
     //Setting window size.
-    setMinimumSize  (400,300);
-    resize          (600,400);
+    setMinimumSize  (600,400);
+    resize          (800,500);
     setCentralWidget(w_cWindow);
 
 }
-
-void MainWindow::closeEvent(QCloseEvent *event){
-
+// MainWindow::~MainWindow:
+//
+// Destructor. Save settings.
+//
+MainWindow::~MainWindow() {
 }
+
+/*void MainWindow::closeEvent(QCloseEvent *event){
+
+}*/
 
 void MainWindow::m_createActions(){
     // File Menu
-    a_newProject = new QAction(QIcon(":/icons/file-new.png"),tr("&New"),this);
-    a_newProject->setShortcut((QKeySequence::New));
-    a_newProject->setStatusTip(tr("Create a new file"));
+	a_newProject = new QAction(QIcon(":/icons/file-new.png"),tr("&New"),this);
+   	a_newProject->setShortcut((QKeySequence::New));
+   	a_newProject->setStatusTip(tr("Create a new file"));
+   	connect(a_newProject, SIGNAL(triggered()), this, SLOT(s_newProject()));
 
     a_openExample = new QAction(QIcon(":/"), tr("&Open Examples"), this);
     a_openExample->setShortcut(QKeySequence::Open);
@@ -219,82 +241,36 @@ void MainWindow::m_createMenus(){
 }
 
 void MainWindow::m_createCentralWidget(){
-    p_control   = new QWidget;
+  //  m_controlPanel   = new QWidget;
 
     w_cWindow   = new QWidget;
     w_tabs      = new QTabWidget(this);
 
-    t_Input     = new QWidget();
+    m_frameInput = new ImageWindow(this);
     t_Output    = new QWidget();
     t_Palette   = new QWidget();
     t_Info      = new QWidget();
-    p_control   = new QWidget();
+    //m_controlPanel   = new QWidget();
 
     w_tabs->setMinimumSize(QSize(300,200));
-    w_tabs->addTab(t_Input, tr("Input"));
+    w_tabs->addTab(m_frameInput, tr("Input"));
     w_tabs->addTab(t_Output,tr("Output"));
     w_tabs->addTab(t_Palette,tr("Palette"));
     w_tabs->addTab(t_Info,tr("Info"));
 
-    p_control->setMinimumSize(QSize(200,200));
+  //  m_controlPanel->setMinimumSize(QSize(200,200));
+
+    //Create contro panel
+    m_controlPanel = new ControlPanel;
+    m_controlPanel-> setMinimumSize(350, QSizePolicy::Expanding);
 
     mainLayout = new QHBoxLayout;
     mainLayout->addWidget(w_tabs);
-    mainLayout->addWidget(p_control);
+    mainLayout->addWidget(m_controlPanel);
     w_cWindow->setLayout(mainLayout);
     w_cWindow->show();
 }
 
-/*void MainWindow::createCentralWidget(){
-
-    QTabWidget *tabs = new QTabWidget(this);
-    tabs->setMinimumSize(QSize(300,200));
-    QWidget *window = new QWidget;
-
-    QWidget *tabInput = new QWidget();
-    QWidget *tabOutput = new QWidget();
-    QWidget *tabPalette = new QWidget();
-    QWidget *tabInfo = new QWidget();
-
-
-    tabs->addTab(tabInput, "Input");
-    tabs->addTab(tabOutput, "Output");
-    tabs->addTab(tabPalette, "Palette");
-    tabs->addTab(tabInfo, "Info");
-
-    QWidget *controlPanel = new QWidget;
-    controlPanel->setMinimumSize(QSize(200,200));
-
-    QHBoxLayout *hlayout = new QHBoxLayout;
-
-    hlayout->addWidget(tabs);\
-    hlayout->addWidget(controlPanel);
-    window->setLayout(hlayout);
-    window->show();
-
-
-    /*QTabWidget *m_tabPreview = new QTabWidget;
-    m_tabPreview->setMinimumSize(512, 512);
-    m_tabPreview->setContentsMargins(0, 0, 0, 0);
-    m_tabPreview->setSizePolicy(QSizePolicy::Expanding,
-                                QSizePolicy::Expanding);
-    QWidget *m_frameInput = new QWidget;
-    QWidget *m_frameOutput = new QWidget;
-    QWidget *m_framePalette = new QWidget;
-    QWidget *m_frameInfo = new QWidget;
-    m_tabPreview->addTab(m_frameInput, "Input");
-    m_tabPreview->addTab(m_frameOutput, "Ouput");
-    m_tabPreview->addTab(m_framePalette, "Palette");
-    m_tabPreview->addTab(m_frameInfo, "Info");
-
-    QWidget *m_controlPanel = new QWidget;
-    m_controlPanel->setMinimumSize(300, QSizePolicy::Expanding);
-
-    QHBoxLayout *hbox = new QHBoxLayout();
-    hbox->addWidget(m_tabPreview);
-    hbox->addWidget(m_controlPanel);
-}
-*/
 
 void MainWindow::m_createToolBars(){
     fileToolBar = addToolBar(tr("File"));
@@ -319,6 +295,82 @@ void MainWindow::m_createToolBars(){
 
     editToolBar->addAction(a_noneIcon);
 }
+
+
+void
+MainWindow::updateInputFrame()
+{
+	if(m_params.image().isNull()) {
+		qDebug() << "Error: NULL image.";
+		return;
+	}
+	m_frameInput->setImage(m_params.image());
+}
+
+
+TesseraParameters&
+MainWindow::parameters()
+{
+    return m_params;
+}
+
+// Slot functions
+void
+MainWindow::s_newProject()
+{
+    // prompt for input filename
+    QFileDialog dialog(this);
+
+    // open the last known working directory
+    if(!m_currentInDir.isEmpty())
+        dialog.setDirectory(m_currentInDir);
+
+    // display existing files and directories
+    dialog.setFileMode(QFileDialog::ExistingFile);
+
+    // invoke native file browser to select file
+    QString sel("Images");
+    QString file =  dialog.getOpenFileName(this,
+                 "Open File", m_currentInDir,
+                 "Images (*.jpg *.jpeg *.png *.bmp *.tiff *.tif);;"
+                  "All files (*)", &sel);
+
+    // no file selected.. return
+    if(file.isNull())
+        return;
+
+    // update location of current directory
+    m_currentInDir = QFileInfo(file).dir().absolutePath();
+
+    // load input image
+    QImage image = QImage(file);
+
+    // check whether image could be read
+    if(image.isNull()) {
+        QMessageBox::critical(this,
+                              "Error",
+                              "Image could not be read",
+                              QMessageBox::Ok);
+        return;
+    }
+    m_params.reset();
+    m_params.setOriginalImage(image);
+    m_params.setImage(image);
+    m_controlPanel->resetControls();
+    updateInputFrame();
+}
+
+void MainWindow::s_loadProject()	{}
+void MainWindow::s_saveProject()	{}
+void MainWindow::s_undo()		{}
+void MainWindow::s_redo()		{}
+void MainWindow::s_zoomIn()		{}
+void MainWindow::s_zoomOut()		{}
+
+void MainWindow::s_showInputTab()  {m_tabPreview->setCurrentIndex(0);}
+void MainWindow::s_showOutputTab() {m_tabPreview->setCurrentIndex(1);}
+void MainWindow::s_showPaletteTab(){m_tabPreview->setCurrentIndex(2);}
+void MainWindow::s_showInfoTab()   {m_tabPreview->setCurrentIndex(3);}
 
 void MainWindow::m_createStatusBar(){
 }

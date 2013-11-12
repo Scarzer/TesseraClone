@@ -13,9 +13,18 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+        ControlPanel.cpp \
+    ImageWindow.cpp \
+    TesseraParameters.cpp \
+        HSL.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    ControlPanel.h \
+    ImageWindow.h \
+    TesseraParameters.h \
+    Globals.h \
+    HSL.h
 
 RESOURCES += \
     icons.qrc
