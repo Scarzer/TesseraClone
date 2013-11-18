@@ -17,14 +17,16 @@ SOURCES += main.cpp\
         ControlPanel.cpp \
     ImageWindow.cpp \
     TesseraParameters.cpp \
-        HSL.cpp
+        HSL.cpp \
+    OutputWindow.cpp
 
 HEADERS  += mainwindow.h \
     ControlPanel.h \
     ImageWindow.h \
     TesseraParameters.h \
     Globals.h \
-    HSL.h
+    HSL.h \
+    OutputWindow.h
 
 RESOURCES += \
     icons.qrc

@@ -11,8 +11,8 @@ MainWindow::MainWindow()
            m_frameOutput (NULL),
            m_framePalette(NULL),
            m_frameInfo	 (NULL),
-           m_controlPanel(NULL),
-           m_tabPreview	 (NULL)
+           m_controlPanel(NULL)
+           //m_tabPreview	 (NULL)
 {
 
     // set g_mainWindow
@@ -247,16 +247,16 @@ void MainWindow::m_createCentralWidget(){
     w_tabs      = new QTabWidget(this);
 
     m_frameInput = new ImageWindow(this);
-    t_Output    = new QWidget();
-    t_Palette   = new QWidget();
-    t_Info      = new QWidget();
+    m_frameOutput  = new OutputWindow(this);
+    m_framePalette   = new QWidget();
+    m_frameInfo      = new QWidget();
     //m_controlPanel   = new QWidget();
 
     w_tabs->setMinimumSize(QSize(300,200));
     w_tabs->addTab(m_frameInput, tr("Input"));
-    w_tabs->addTab(t_Output,tr("Output"));
-    w_tabs->addTab(t_Palette,tr("Palette"));
-    w_tabs->addTab(t_Info,tr("Info"));
+    w_tabs->addTab(m_frameOutput,tr("Output"));
+    w_tabs->addTab(m_framePalette,tr("Palette"));
+    w_tabs->addTab(m_frameInfo,tr("Info"));
 
   //  m_controlPanel->setMinimumSize(QSize(200,200));
 
@@ -300,13 +300,21 @@ void MainWindow::m_createToolBars(){
 void
 MainWindow::updateInputFrame()
 {
-	if(m_params.image().isNull()) {
-		qDebug() << "Error: NULL image.";
-		return;
-	}
-	m_frameInput->setImage(m_params.image());
+    if(m_params.image().isNull()) {
+        qDebug() << "Error: NULL image.";
+        return;
+    }
+    m_frameInput->setImage(m_params.image());
 }
 
+void MainWindow::updateOutputFrame()
+{
+    if(m_params.image().isNull()) {
+        qDebug() << "Error: NULL image.";
+        return;
+    }
+    m_frameOutput->setImage(m_params.image());
+}
 
 TesseraParameters&
 MainWindow::parameters()
@@ -358,6 +366,7 @@ MainWindow::s_newProject()
     m_params.setImage(image);
     m_controlPanel->resetControls();
     updateInputFrame();
+    //updateOutputFrame();
 }
 
 void MainWindow::s_loadProject()	{}
@@ -367,10 +376,10 @@ void MainWindow::s_redo()		{}
 void MainWindow::s_zoomIn()		{}
 void MainWindow::s_zoomOut()		{}
 
-void MainWindow::s_showInputTab()  {m_tabPreview->setCurrentIndex(0);}
-void MainWindow::s_showOutputTab() {m_tabPreview->setCurrentIndex(1);}
-void MainWindow::s_showPaletteTab(){m_tabPreview->setCurrentIndex(2);}
-void MainWindow::s_showInfoTab()   {m_tabPreview->setCurrentIndex(3);}
+void MainWindow::s_showInputTab()  {w_tabs->setCurrentIndex(0);}
+void MainWindow::s_showOutputTab() {w_tabs->setCurrentIndex(1);}
+void MainWindow::s_showPaletteTab(){w_tabs->setCurrentIndex(2);}
+void MainWindow::s_showInfoTab()   {w_tabs->setCurrentIndex(3);}
 
 void MainWindow::m_createStatusBar(){
 }

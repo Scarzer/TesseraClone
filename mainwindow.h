@@ -7,6 +7,7 @@
 #include "ControlPanel.h"
 #include "ImageWindow.h"
 #include "TesseraParameters.h"
+#include "OutputWindow.h"
 
 QT_BEGIN_NAMESPACE
 class QAction;
@@ -23,6 +24,7 @@ public:
 
     TesseraParameters&	parameters		();
     void			updateInputFrame	();
+    void            updateOutputFrame   (); //output window
 
     //! Destructor.
     ~MainWindow();
@@ -66,11 +68,11 @@ private:
     QTabWidget      *w_tabs;
     QWidget         *w_cWindow;
     QWidget         *t_Input;
-    QWidget         *t_Output;
-    QWidget         *t_Palette;
-    QWidget         *t_Info;
-    ControlPanel    *p_control;
-    //QWidget     *p_control;
+//    QWidget         *t_Output;
+//    QWidget         *t_Palette;
+//    QWidget         *t_Info;
+//    ControlPanel    *p_control;
+//    QWidget         *p_control;
 
     // File Menu
     QAction *a_newProject;
@@ -149,11 +151,11 @@ private:
 
     // widgets
     ImageWindow		*m_frameInput;
-    QWidget     	*m_frameOutput;
+    OutputWindow    *m_frameOutput;
     QWidget     	*m_framePalette;
     QWidget         *m_frameInfo;
     ControlPanel	*m_controlPanel;
-    QTabWidget		*m_tabPreview;
+//    QTabWidget		*m_tabPreview;
 
     // other stuff
     QString         m_currentInDir;
