@@ -43,10 +43,10 @@ MainWindow::~MainWindow() {
 
 void MainWindow::m_createActions(){
     // File Menu
-	a_newProject = new QAction(QIcon(":/icons/file-new.png"),tr("&New"),this);
-   	a_newProject->setShortcut((QKeySequence::New));
-   	a_newProject->setStatusTip(tr("Create a new file"));
-   	connect(a_newProject, SIGNAL(triggered()), this, SLOT(s_newProject()));
+    a_newProject = new QAction(QIcon(":/icons/file-new.png"),tr("&New"),this);
+    a_newProject->setShortcut((QKeySequence::New));
+    a_newProject->setStatusTip(tr("Create a new file"));
+    connect(a_newProject, SIGNAL(triggered()), this, SLOT(s_newProject()));
 
     a_openExample = new QAction(QIcon(":/"), tr("&Open Examples"), this);
     a_openExample->setShortcut(QKeySequence::Open);
@@ -366,7 +366,7 @@ MainWindow::s_newProject()
     m_params.setImage(image);
     m_controlPanel->resetControls();
     updateInputFrame();
-    //updateOutputFrame();
+    updateOutputFrame();
 }
 
 void MainWindow::s_loadProject()	{}

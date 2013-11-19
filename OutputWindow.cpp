@@ -18,8 +18,8 @@ OutputWindow::OutputWindow(QWidget *parent, Qt::WindowFlags f)
 
 void OutputWindow::files(){
 
-    QFile textFile(":/TileImages/text.txt");
-
+    // QFile textFile(":/TileImages/text.txt");
+    QFile textFile("TileImages/text.txt");
     if (textFile.open(QIODevice::ReadOnly))
     {
        QTextStream textStream(&textFile);
@@ -33,8 +33,9 @@ void OutputWindow::files(){
 
     for (int i=0;i<stringList.size();i++)
     {
-                 stringList[i].prepend(":/TileImages/");
-       cout<< stringList[i].toStdString()<<endl;
+                 // stringList[i].prepend(":/TileImages/");
+                 stringList[i].prepend("TileImages/");
+         cout<< stringList[i].toStdString()<<endl;
     }
 
 //Read all files and get RGB values, RGB values are stored in QVectors
@@ -68,17 +69,9 @@ void OutputWindow::files(){
 
 void OutputWindow::setImage(const QImage image)
 {
-
- /* x is the the number of division
-  VG=3/8
-  mosaic size is 40"
-y= x*h/w
-*/
     int mosaic=40;
     int x=qFloor(8*mosaic/3);
     int y=qFloor(x*image.height()/image.width());
-     //cout<<"width:"<<x<<endl;
-    //cout<<"height:"<<y<<endl;
 
      Oimage=image.scaled(x,y,Qt::IgnoreAspectRatio,
               Qt::SmoothTransformation);
@@ -101,7 +94,7 @@ y= x*h/w
             int d[stringList.size()];
              int value,index=0;
                          for (int tile=0;tile<redT.size();tile++)
-                      { // since we only need the difference,  we can omit taking the sqrt.
+                      {
                             d[tile]=((red-redT[tile])*(red-redT[tile]))+
                              ((green-greenT[tile])*(green-greenT[tile]))+
                              ((blue-blueT[tile])*(blue-blueT[tile]));
@@ -122,7 +115,7 @@ y= x*h/w
 
            }
     }
-    //width and height here represent the size of the tile
+    //width and height = the size of the tile
    int width=90;
 
    int height=90;
@@ -154,8 +147,8 @@ QImage output(width*x,height*y,QImage::Format_RGB32);
 
                  }
 
-                // output.save("/Users/juank46/Tessera/flower.png",0,-1); //this image will have the original size created QImage output.
-                 //scaling down final image is less than 4000 px
+
+          //scaling down final image is less than 4000 px
                QImage out=output.scaled(x*30,y*30, Qt::IgnoreAspectRatio,Qt::SmoothTransformation);
     m_pixmap=QPixmap::fromImage(out);
 

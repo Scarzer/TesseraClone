@@ -2,4 +2,4 @@
 
 ## Group: Sally Ventura, Carlos Peralta, Irving Derin
 
-Currently we have the main tab widget working! Weet
+Up to date wit Homework#4 working. 

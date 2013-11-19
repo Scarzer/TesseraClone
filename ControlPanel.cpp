@@ -435,7 +435,7 @@ ControlPanel::changeContrast(int val)
 //
 void
 ControlPanel::changeHue(int val)
-{    
+{
     blockSignals(true);
 
     m_sliderIn[2]->setValue(val);
@@ -547,76 +547,76 @@ ControlPanel::revertOriginal()
 int
 ControlPanel::updateInputImage(TesseraParameters::ColorMode mode)
 {
-	// error checking
-	TesseraParameters &params = g_mainWindow->parameters();
-	const QImage &origImage = params.originalImage();
-	const QImage &curImage = params.image();
-	if(origImage.isNull() || curImage.isNull())
-		return 0;
+    // error checking
+    TesseraParameters &params = g_mainWindow->parameters();
+    const QImage &origImage = params.originalImage();
+    const QImage &curImage = params.image();
+    if(origImage.isNull() || curImage.isNull())
+        return 0;
 
-	if(m_image.isNull())
-		m_image = origImage;
+    if(m_image.isNull())
+        m_image = origImage;
 
-	// update colormode and current image
-	if(params.colorMode() != mode)
-		m_image = curImage;
-	params.setColorMode(mode);
+    // update colormode and current image
+    if(params.colorMode() != mode)
+        m_image = curImage;
+    params.setColorMode(mode);
 
-	QImage inImage = m_image;
-	QImage outImage;
-	if(params.colorMode() == TesseraParameters::RGB) {// brightness-contrast
-		// get contrast and brightness
-		int	contrast	= params.contrast();
-		int	brightness	= params.brightness();
+    QImage inImage = m_image;
+    QImage outImage;
+    if(params.colorMode() == TesseraParameters::RGB) {// brightness-contrast
+        // get contrast and brightness
+        int	contrast	= params.contrast();
+        int	brightness	= params.brightness();
 
-		// init slope of intensity ramp
-		double	c;
-		if(contrast >= 0)
-			c = contrast/25. + 1.0;   // slope: 1 to 5
-		else	c = 1. + (contrast/133.); // slope: 1 to 0
+        // init slope of intensity ramp
+        double	c;
+        if(contrast >= 0)
+            c = contrast/25. + 1.0;   // slope: 1 to 5
+        else	c = 1. + (contrast/133.); // slope: 1 to 0
 
-		// init lookup table: multiply by contrast; add brightness
-		int lut[256];
-		for(int v=0; v<256; v++) {
-			int i = (v - 128)*c + (128 + brightness);
-			lut[v] = CLIP(i, 0, 255);
-		}
+        // init lookup table: multiply by contrast; add brightness
+        int lut[256];
+        for(int v=0; v<256; v++) {
+            int i = (v - 128)*c + (128 + brightness);
+            lut[v] = CLIP(i, 0, 255);
+        }
 
-		// init input dimensions
-		int w = inImage.width ();
-		int h = inImage.height();
+        // init input dimensions
+        int w = inImage.width ();
+        int h = inImage.height();
 
-		// create output image
-		outImage = QImage(w, h, QImage::Format_RGB32);
+        // create output image
+        outImage = QImage(w, h, QImage::Format_RGB32);
 
-		// apply lookup table to source image to make input image
-		for(int y=0; y<h; y++) {
-			const QRgb *src = (const QRgb*) inImage.scanLine(y);
-			QRgb *out  = (QRgb*) outImage.scanLine(y);
-			for(int x=0; x<w; x++) {
-				// set transparent pixels to white
-				if(qAlpha(src[x]) < 128) {
-					*out++ = qRgb(255, 255, 255);
-				} else {
-					*out++ = qRgb(lut[qRed  (src[x])],
-						      lut[qGreen(src[x])],
-						      lut[qBlue (src[x])]);
-				}
-			}
-		}
-	} else {			// hue-saturation
-		double h = params.hue() / 180.0;
-		double s = params.saturation() / 100.0;
-		double l = params.lightness() / 100.0;
-		HSL hsl;
-		hsl.setHue	 (HSL::AllHues, h);
-		hsl.setSaturation(HSL::AllHues, s);
-		hsl.setLightness (HSL::AllHues, l);
-		hsl.adjustHueSaturation(inImage, outImage);
-	}
-	params.setImage(outImage);
-	g_mainWindow->updateInputFrame();
+        // apply lookup table to source image to make input image
+        for(int y=0; y<h; y++) {
+            const QRgb *src = (const QRgb*) inImage.scanLine(y);
+            QRgb *out  = (QRgb*) outImage.scanLine(y);
+            for(int x=0; x<w; x++) {
+                // set transparent pixels to white
+                if(qAlpha(src[x]) < 128) {
+                    *out++ = qRgb(255, 255, 255);
+                } else {
+                    *out++ = qRgb(lut[qRed  (src[x])],
+                              lut[qGreen(src[x])],
+                              lut[qBlue (src[x])]);
+                }
+            }
+        }
+    } else {			// hue-saturation
+        double h = params.hue() / 180.0;
+        double s = params.saturation() / 100.0;
+        double l = params.lightness() / 100.0;
+        HSL hsl;
+        hsl.setHue	 (HSL::AllHues, h);
+        hsl.setSaturation(HSL::AllHues, s);
+        hsl.setLightness (HSL::AllHues, l);
+        hsl.adjustHueSaturation(inImage, outImage);
+    }
+    params.setImage(outImage);
+    g_mainWindow->updateInputFrame();
 
-	return 1;
+    return 1;
 }
 
