@@ -18,7 +18,7 @@ MainWindow::MainWindow()
     // set g_mainWindow
     g_mainWindow = this;
 
-    tileMap = m_getTiles("/home/irv/Projects/TesseraClone/TileImages");
+    tileMap = m_getTiles("/Users/scarzer/Projects/QtWorks/TesseraClone/TileImages/");
     qDebug() << tileMap.isEmpty();
     m_createActions();
     m_createMenus();

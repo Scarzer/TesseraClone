@@ -55,5 +55,5 @@ QPixmap Tile::getScaled(int width, int height){
 }
     
 QString Tile::getName(){
-    return Tile::_tileName.section('/', 5, 6);
+    return Tile::_tileName.section('/', 6, 7);
 }

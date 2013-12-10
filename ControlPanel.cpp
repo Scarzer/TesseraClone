@@ -299,13 +299,18 @@ ControlPanel::createGroupTile()
     QGroupBox *groupBox = new QGroupBox;
     QVBoxLayout *vbox = new QVBoxLayout;
     QListWidget *tileList = new QListWidget(this);
-    new QListWidgetItem("Foo Bar", tileList);
-
     QMapIterator<QRgb, Tile> i(tileMap);
+
     while(i.hasNext()){
+        // Get the Image from the Map
         i.next();
         Tile thing = i.value();
         QPixmap thumbNail = thing.getScaled(90, 90);
+
+        // Drop any null pictures
+        if(thumbNail.isNull()) continue;
+
+        // Make a new list item and pop it in!
         QListWidgetItem* temp = new QListWidgetItem();
         temp->setIcon(thumbNail);
         temp->setText(thing.getName());
