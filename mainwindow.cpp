@@ -18,6 +18,7 @@ MainWindow::MainWindow()
     // set g_mainWindow
     g_mainWindow = this;
 
+    m_getTiles(tileMap, "/home/irv/Projects/TesseraClone/TileImages");
     m_createActions();
     m_createMenus();
     m_createCentralWidget();
@@ -381,6 +382,23 @@ void MainWindow::s_showOutputTab() {w_tabs->setCurrentIndex(1);}
 void MainWindow::s_showPaletteTab(){w_tabs->setCurrentIndex(2);}
 void MainWindow::s_showInfoTab()   {w_tabs->setCurrentIndex(3);}
 
-void MainWindow::m_createStatusBar(){
+void MainWindow::m_createStatusBar(){}
+
+void MainWindow::m_getTiles(QMap<QRgb, Tile> tileMap, QString tileDir){
+    QDir                        parentDir(tileDir);
+    QFileInfoList               fileInfo;
+
+    fileInfo = parentDir.entryInfoList();
+    int fileInfoLen = fileInfo.length();
+
+    for(int i = 0; i < fileInfoLen; i++){
+        Tile tileImage (fileInfo[i].absoluteFilePath() );
+        tileMap.insert(tileImage.colorKey(), tileImage);
+    }
+    QList<QRgb> keys = tileMap.keys();
+    qDebug() << "Number of Keys: " << keys.length();
+    qDebug() << "Number of Files: " << fileInfo.length();
 }
+
+
 

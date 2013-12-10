@@ -4,10 +4,12 @@
 //#include <QMainWindow>
 #include <QtGui>
 #include <QtWidgets>
+#include <QMap>
 #include "ControlPanel.h"
 #include "ImageWindow.h"
 #include "TesseraParameters.h"
 #include "OutputWindow.h"
+#include "Tile.h"
 
 QT_BEGIN_NAMESPACE
 class QAction;
@@ -25,6 +27,7 @@ public:
     TesseraParameters&	parameters		();
     void			updateInputFrame	();
     void            updateOutputFrame   (); //output window
+
 
     //! Destructor.
     ~MainWindow();
@@ -52,6 +55,10 @@ private:
     void m_createCentralWidget();
     void m_createToolBars();
     void m_createStatusBar();
+    void m_getTiles(const QMap<QRgb, Tile> tileMap, QString tileDir);
+
+    QMap <QRgb, Tile> tileMap;
+
 
     QMenuBar *mainMenu;
 
