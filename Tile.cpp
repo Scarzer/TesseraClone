@@ -5,8 +5,9 @@ Tile::Tile (QString fileName){
     
 
     if(_image.load(fileName)){
-    _width  =   _image.width();
-    _height =   _image.height();
+    _tileName =   fileName ;
+    _width    =   _image.width();
+    _height   =   _image.height();
 
     int tR = 0, tG = 0, tB = 0;
     QRgb currPixel;
@@ -38,4 +39,21 @@ Tile::Tile (QString fileName){
 
 QRgb Tile::colorKey(){
     return _avgValue;
+}
+
+QPixmap Tile::getScaled(int width, int height){
+    QImage temp = _image.scaled(width, height);
+    QPixmap returnTile;
+    
+    if(returnTile.convertFromImage(_image)){
+        return returnTile;
+    }
+    else{
+        qDebug() << "There was an error!";
+        return returnTile;
+    }
+}
+    
+QString Tile::getName(){
+    return Tile::_tileName.section('/', 5, 6);
 }

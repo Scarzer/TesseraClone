@@ -5,9 +5,11 @@
 
 //ControlPanel::ControlPanel
 // Constructor
-ControlPanel::ControlPanel(QWidget *parent, Qt::WindowFlags f)
+ControlPanel::ControlPanel
+    (QMap<QRgb, Tile> inTileMap, QWidget *parent, Qt::WindowFlags f)
     : QWidget	(parent, f)
 {
+    tileMap = inTileMap;
     createPanelTree();
     QVBoxLayout *vbox = new QVBoxLayout;
     vbox->addWidget(m_tree);
@@ -231,7 +233,8 @@ ControlPanel::createGroupSize()
     QLabel *label[2];
     for(int i=0; i<2; i++)
     {
-        label[i] = new QLabel("Width");
+        if(i == 0) label[i] = new QLabel("Height");
+        else label[i] = new QLabel("Width");
         label[i]->setAlignment(Qt::AlignRight);
     }
 
@@ -292,9 +295,24 @@ ControlPanel::createGroupRender()
 QGroupBox*
 ControlPanel::createGroupTile()
 {
+
     QGroupBox *groupBox = new QGroupBox;
     QVBoxLayout *vbox = new QVBoxLayout;
-    vbox->addWidget(new QPushButton("Empty"));
+    QListWidget *tileList = new QListWidget(this);
+    new QListWidgetItem("Foo Bar", tileList);
+
+    QMapIterator<QRgb, Tile> i(tileMap);
+    while(i.hasNext()){
+        i.next();
+        Tile thing = i.value();
+        QPixmap thumbNail = thing.getScaled(90, 90);
+        QListWidgetItem* temp = new QListWidgetItem();
+        temp->setIcon(thumbNail);
+        temp->setText(thing.getName());
+        tileList->addItem(temp);
+    }
+    vbox->addWidget(tileList);
+    qDebug() << "Size of the list: " << tileList->count();
     groupBox->setLayout(vbox);
     return groupBox;
 }
@@ -620,3 +638,11 @@ ControlPanel::updateInputImage(TesseraParameters::ColorMode mode)
     return 1;
 }
 
+
+//////////////////////////////////////////////////
+//  Populate Tile Palette
+//
+
+void ControlPanel::setTileMap( QMap<QRgb, Tile> inTileMap ){
+    tileMap=inTileMap;
+}

@@ -69,7 +69,7 @@ void OutputWindow::files(){
 
 void OutputWindow::setImage(const QImage image)
 {
-    int mosaic=40;
+    int mosaic=80;
     int x=qFloor(8*mosaic/3);
     int y=qFloor(x*image.height()/image.width());
 

@@ -2,19 +2,18 @@
 #define TILE_H
 
 #include <QImage>
+#include <QPixmap>
 
 class Tile{ 
 
 public:
     Tile( QString fileName );
     QRgb colorKey();
-    QImage getScaled(int width, int height);
+    QPixmap getScaled(int width, int height);
+    QString getName();
 
-    int     _red;
-    int     _green;
-    int     _blue;
 
-protected:
+    protected:
     
         
 
@@ -23,7 +22,12 @@ private:
 
     int     _width;
     int     _height;
-    QRgb  _avgValue;
+    int     _red;
+    int     _green;
+    int     _blue;
+
+    QString _tileName;
+    QRgb    _avgValue;
     QImage  _image;
 
 };

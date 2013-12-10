@@ -18,7 +18,8 @@ MainWindow::MainWindow()
     // set g_mainWindow
     g_mainWindow = this;
 
-    m_getTiles(tileMap, "/home/irv/Projects/TesseraClone/TileImages");
+    tileMap = m_getTiles("/home/irv/Projects/TesseraClone/TileImages");
+    qDebug() << tileMap.isEmpty();
     m_createActions();
     m_createMenus();
     m_createCentralWidget();
@@ -262,7 +263,8 @@ void MainWindow::m_createCentralWidget(){
   //  m_controlPanel->setMinimumSize(QSize(200,200));
 
     //Create contro panel
-    m_controlPanel = new ControlPanel;
+    m_controlPanel = new ControlPanel(tileMap,this);
+    m_controlPanel-> setTileMap(tileMap);
     m_controlPanel-> setMinimumSize(350, QSizePolicy::Expanding);
 
     mainLayout = new QHBoxLayout;
@@ -384,9 +386,10 @@ void MainWindow::s_showInfoTab()   {w_tabs->setCurrentIndex(3);}
 
 void MainWindow::m_createStatusBar(){}
 
-void MainWindow::m_getTiles(QMap<QRgb, Tile> tileMap, QString tileDir){
+QMap<QRgb, Tile> MainWindow::m_getTiles(QString tileDir){
     QDir                        parentDir(tileDir);
     QFileInfoList               fileInfo;
+    QMap<QRgb, Tile>            tileMap;
 
     fileInfo = parentDir.entryInfoList();
     int fileInfoLen = fileInfo.length();
@@ -398,6 +401,9 @@ void MainWindow::m_getTiles(QMap<QRgb, Tile> tileMap, QString tileDir){
     QList<QRgb> keys = tileMap.keys();
     qDebug() << "Number of Keys: " << keys.length();
     qDebug() << "Number of Files: " << fileInfo.length();
+
+    return tileMap;
+
 }
 
 

@@ -32,6 +32,10 @@ public:
     //! Destructor.
     ~MainWindow();
 
+
+protected:
+    QMap <QRgb, Tile> tileMap;
+
 private slots:
 
     // slots
@@ -55,9 +59,8 @@ private:
     void m_createCentralWidget();
     void m_createToolBars();
     void m_createStatusBar();
-    void m_getTiles(const QMap<QRgb, Tile> tileMap, QString tileDir);
+    QMap<QRgb, Tile> m_getTiles( QString tileDir);
 
-    QMap <QRgb, Tile> tileMap;
 
 
     QMenuBar *mainMenu;
