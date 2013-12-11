@@ -18,8 +18,8 @@ SOURCES += main.cpp\
     ImageWindow.cpp \
     TesseraParameters.cpp \
         HSL.cpp \
-    OutputWindow.cpp \
-    Tile.cpp
+    Tile.cpp \
+    outputwindows.cpp
 
 HEADERS  += mainwindow.h \
     ControlPanel.h \
@@ -27,8 +27,8 @@ HEADERS  += mainwindow.h \
     TesseraParameters.h \
     Globals.h \
     HSL.h \
-    OutputWindow.h \
-    Tile.h
+    Tile.h \
+    outputwindows.h
 
 RESOURCES += \
     icons.qrc

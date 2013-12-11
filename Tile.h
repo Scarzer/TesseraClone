@@ -7,6 +7,8 @@
 class Tile{ 
 
 public:
+    Tile();
+    Tile(const Tile& otherTile );
     Tile( QString fileName );
     QRgb colorKey();
     QPixmap getScaled(int width, int height);

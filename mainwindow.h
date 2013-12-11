@@ -8,7 +8,7 @@
 #include "ControlPanel.h"
 #include "ImageWindow.h"
 #include "TesseraParameters.h"
-#include "OutputWindow.h"
+#include "outputwindows.h"
 #include "Tile.h"
 
 QT_BEGIN_NAMESPACE
@@ -161,7 +161,7 @@ private:
 
     // widgets
     ImageWindow		*m_frameInput;
-    OutputWindow    *m_frameOutput;
+    OutputWindows    *m_frameOutput;
     QWidget     	*m_framePalette;
     QWidget         *m_frameInfo;
     ControlPanel	*m_controlPanel;

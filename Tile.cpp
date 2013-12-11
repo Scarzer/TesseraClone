@@ -1,6 +1,22 @@
 #include "Tile.h"
 #include "QDebug"
 
+Tile::Tile(){
+
+}
+
+Tile::Tile(const Tile& otherTile ){
+    _tileName = otherTile._tileName;
+    _width = otherTile._width;
+    _height = otherTile._height;
+    _red = otherTile._red;
+    _blue = otherTile._blue;
+    _green = otherTile._green;
+    _avgValue = otherTile._avgValue;
+    _image = otherTile._image;
+
+}
+
 Tile::Tile (QString fileName){
     
 
@@ -50,6 +66,7 @@ QPixmap Tile::getScaled(int width, int height){
     }
     else{
         qDebug() << "There was an error!";
+        qDebug() << "My name is " << _tileName << " and my avg is " << _avgValue;
         return returnTile;
     }
 }

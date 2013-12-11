@@ -249,7 +249,7 @@ void MainWindow::m_createCentralWidget(){
     w_tabs      = new QTabWidget(this);
 
     m_frameInput = new ImageWindow(this);
-    m_frameOutput  = new OutputWindow(this);
+    m_frameOutput  = new OutputWindows(this);
     m_framePalette   = new QWidget();
     m_frameInfo      = new QWidget();
     //m_controlPanel   = new QWidget();
@@ -316,7 +316,7 @@ void MainWindow::updateOutputFrame()
         qDebug() << "Error: NULL image.";
         return;
     }
-    m_frameOutput->setImage(m_params.image());
+    m_frameOutput->applyImage(m_params.image(), tileMap);
 }
 
 TesseraParameters&

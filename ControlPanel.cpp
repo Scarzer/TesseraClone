@@ -310,7 +310,7 @@ ControlPanel::createGroupTile()
         // Drop any null pictures
         if(thumbNail.isNull()) continue;
 
-        // Make a new list item and pop it in!
+        // Make a new list item and pop it in
         QListWidgetItem* temp = new QListWidgetItem();
         temp->setIcon(thumbNail);
         temp->setText(thing.getName());
