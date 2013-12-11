@@ -26,7 +26,7 @@ public:
 
     TesseraParameters&	parameters		();
     void			updateInputFrame	();
-    void            updateOutputFrame   (); //output window
+    void           updateOutputFrame   (); //output window
 
 
     //! Destructor.

@@ -9,10 +9,10 @@ class OutputWindows : public QWidget
     Q_OBJECT
 public:
     explicit OutputWindows(QWidget *parent = 0);
-    void    applyImage(const QImage inImage, QMap<QRgb, Tile>);
+    void    applyImage(QImage inImage, QMap<QRgb, Tile>);
 
 private:
-    void    _resizeEvent(QResizeEvent *event);
+    void    resizeEvent(QResizeEvent *event);
     void    _updatePixmap();
     QRgb    _findTile (QRgb pixelColor);
 
@@ -21,6 +21,7 @@ private:
     int                 m_numDirect;
     int                 m_tileX;
     int                 m_tileY;
+    int                 m_scaleFactor;
     QPixmap             m_pixmap;
     QLabel              *m_outLabel;
     QVBoxLayout         *m_pixBox;

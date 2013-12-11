@@ -19,7 +19,6 @@ MainWindow::MainWindow()
     g_mainWindow = this;
 
     tileMap = m_getTiles("/Users/scarzer/Projects/QtWorks/TesseraClone/TileImages/");
-    qDebug() << tileMap.isEmpty();
     m_createActions();
     m_createMenus();
     m_createCentralWidget();

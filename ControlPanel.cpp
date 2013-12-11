@@ -317,7 +317,6 @@ ControlPanel::createGroupTile()
         tileList->addItem(temp);
     }
     vbox->addWidget(tileList);
-    qDebug() << "Size of the list: " << tileList->count();
     groupBox->setLayout(vbox);
     return groupBox;
 }

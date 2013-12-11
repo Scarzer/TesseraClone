@@ -10,17 +10,20 @@ OutputWindows::OutputWindows(QWidget *parent) :
     m_pixBox->addWidget(m_outLabel);
     setLayout(m_pixBox);
 
-    m_tileX = 20;
-    m_tileY = 20;
+    m_tileX = 15;
+    m_tileY = 15;
     m_numCached = 0;
     m_numDirect = 0;
+    m_scaleFactor = 2;
 
 
 
 }
 
-void OutputWindows::applyImage(const QImage inImage, QMap<QRgb, Tile> inTiles){
+void OutputWindows::applyImage(QImage inImage, QMap<QRgb, Tile> inTiles){
     m_availableTiles = inTiles;
+    inImage = inImage.scaled(inImage.width()/2, inImage.height()/2);
+
     int imgHeight = inImage.height();
     int imgWidth  = inImage.width();
     int sWidth    = imgWidth*m_tileX;
@@ -39,6 +42,8 @@ void OutputWindows::applyImage(const QImage inImage, QMap<QRgb, Tile> inTiles){
     qDebug() << "Tiles: " << m_availableTiles.count();
     qDebug() << "Pixel(0,0): " << inImage.pixel(0,0);
     qDebug() << "Find Output: " << _findTile(inImage.pixel(0,0));
+    QTime timeToMake;
+    timeToMake.start();
     for(int i = 0; i < imgHeight; i++){
         for( int j = 0; j < imgWidth; j++){
             QPixmap toBePlaced;
@@ -65,6 +70,7 @@ void OutputWindows::applyImage(const QImage inImage, QMap<QRgb, Tile> inTiles){
 
     bool save = tempOut.save("/Users/scarzer/createdMosaic.jpg");
     qDebug() << "save: " << save;
+    qDebug() << "Time Elapsed: " << timeToMake.elapsed();
 }
 
 
@@ -93,7 +99,6 @@ QRgb OutputWindows::_findTile(QRgb pixelColor){
     int pG = qGreen(pixelColor);
     int pB = qBlue(pixelColor);
 
-    i.next();
     double baseLine = sqrt(pow(pR-tR,2) + pow(pG-tG,2) + pow(pB-tB, 2));
     //qDebug() << "Baseline Value: " << baseLine;
     QRgb   tempPix = pixelColor;
@@ -131,4 +136,10 @@ void OutputWindows::_updatePixmap(){
     if (width < height) m_outLabel-> setPixmap(m_pixmap.scaledToWidth(width));
     else m_outLabel->setPixmap(m_pixmap.scaledToHeight(height));
 
+}
+
+void OutputWindows::resizeEvent(QResizeEvent *event){
+    QWidget::resizeEvent(event);
+    qDebug() << "Updating Size";
+    _updatePixmap();
 }
